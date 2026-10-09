@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#120c05">
+<meta name="description" content="Skin Hair Beauty Clinic — Private Dermatology & Cosmetologist Care by Dr. Akhilesh Kumar.">
+<title>Skin Hair Beauty Clinic | Dr. Akhilesh Kumar</title>
+
+<!-- =========================================================
+    CDN DEPENDENCIES
+========================================================= -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: "#120c05",
+        charcoal: "#1a1208",
+        champagne: "#D4AF37",
+        champagne2: "#F3E5AB",
+        ivory: "#F8F5EE",
+      },
+      fontFamily: {
+        display: ["Cinzel", "serif"],
+        sans: ["Inter", "sans-serif"]
+      }
+    }
+  }
+};
+</script>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/framer-motion@10.18.0/dist/framer-motion.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+/* PREMIUM GOLDEN BROWN BACKGROUND FIX */
+html, body { 
+  scroll-behavior: smooth; 
+  /* Rich deep golden brown gradient */
+  background: radial-gradient(circle at top center, #2e1f0e 0%, #0d0904 100%);
+  background-attachment: fixed;
+  margin: 0; 
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important; 
+  color: #F8F5EE;
+  font-family: Inter, sans-serif; 
+}
+
+body::-webkit-scrollbar { width: 4px; }
+body::-webkit-scrollbar-track { background: #0d0904; }
+body::-webkit-scrollbar-thumb { background: #D4AF37; }
+
+::selection { background: #D4AF37; color: #0d0904; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; text-decoration: none; }
+
+.font-display { font-family: Cinzel, serif; }
+
+/* Premium Gold Text */
+.gold {
+  background: linear-gradient(115deg, #dfb260 0%, #D4AF37 30%, #fff2b2 50%, #D4AF37 70%, #b88a30 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gold-glow { text-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
+
+.glass {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.glass-gold {
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(25px);
+}
+
+/* HERO SECTION - WARM GOLDEN OVERLAY */
+.hero {
+  background: 
+    linear-gradient(to right, rgba(18,12,5,0.95) 0%, rgba(18,12,5,0.4) 50%, rgba(18,12,5,0.85) 100%),
+    linear-gradient(to top, #0d0904 0%, rgba(18,12,5,0.1) 40%, rgba(18,12,5,0.6) 100%),
+    url("https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=2200&q=90");
+  background-size: cover; 
+  background-position: center 25%;
+}
+
+@media(max-width: 767px) {
+  .hero {
+    background: 
+      linear-gradient(to bottom, rgba(18,12,5,0.8) 0%, rgba(18,12,5,0.3) 40%, rgba(13,9,4,0.98) 90%, #0d0904 100%),
+      url("https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1000&q=90");
+    background-size: cover; 
+    background-position: center top;
+  }
+}
+
+/* Original Photo Link Fixed */
+.doctor-photo {
+  background-image: 
+    linear-gradient(180deg, rgba(13,9,4,0) 50%, rgba(13,9,4,1) 100%),
+    url("original-photo.jpg");
+  background-size: 100% 100%, contain; 
+  background-position: top center; 
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+  
+
+.skin-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("original-photo.jpg"); background-size: cover; background-position: top center; }
+.pigmentation-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("pigmentation.jpg"); background-size: cover; background-position: center; }
+.acne-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("acne.jpg"); background-size: cover; background-position: center; }
+.hair-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("hair-fall.jpg"); background-size: cover; background-position: center; }
+.vitiligo-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("vitiligo.jpg"); background-size: cover; background-position: center; }
+
+.noise { position: fixed; inset: 0; z-index: 9997; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Custom Cursor */
+.cursor { position: fixed; width: 30px; height: 30px; border: 1px solid rgba(212,175,55,.8); border-radius: 50%; transform: translate(-50%,-50%); pointer-events: none; z-index: 9999; transition: width 0.3s ease, height 0.3s ease, background 0.3s ease; }
+.cursor-dot { position: fixed; width: 4px; height: 4px; background: #D4AF37; border-radius: 50%; transform: translate(-50%,-50%); pointer-events: none; z-index: 10000; }
+.reveal-line { width: 60px; height: 1px; background: #D4AF37; }
+
+/* REFINED LUXURY BUTTON */
+.luxury-btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid #D4AF37;
+  color: #D4AF37;
+  transition: all 0.4s ease;
+}
+.luxury-btn-primary:hover {
+  background: #D4AF37;
+  color: #0d0904;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+.luxury-btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  transition: all 0.4s ease;
+}
+.luxury-btn-secondary:hover {
+  border-color: #D4AF37;
+  color: #D4AF37;
+}
+
+input, textarea, select { font-family: Inter, sans-serif; }
+select option { background: #120c05; color: #fff; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: #D4AF37 !important; }
+
+.mobile-menu { background: rgba(18,12,5,0.98); backdrop-filter: blur(25px); }
+
+/* Floating WhatsApp */
+.whatsapp-float {
+  position: fixed; bottom: 30px; right: 30px; z-index: 9990;
+  width: 55px; height: 55px; background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); transition: transform 0.3s ease;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+.whatsapp-float svg { width: 30px; height: 30px; fill: #ffffff; }
+
+@media(max-width: 767px){
+  .cursor, .cursor-dot { display: none; }
+  .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+  .whatsapp-float svg { width: 26px; height: 26px; }
+}
+</style>
+</head>
+
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { motion, AnimatePresence, useScroll, useTransform } = window.Motion;
+const { useState, useEffect, useRef } = React;
+
+/* --- PRELOADER --- */
+function Preloader({finish}){
+  const [progress, setProgress] = useState(0);
+  useEffect(()=>{
+    const start = performance.now();
+    function tick(now){
+      const elapsed = now - start;
+      const value = Math.min(100, (elapsed/2000)*100);
+      setProgress(value);
+      if(elapsed < 2400) requestAnimationFrame(tick);
+      else finish();
+    }
+    requestAnimationFrame(tick);
+  },[]);
+
+  return(
+    <motion.div
+      initial={{opacity:1}} animate={{opacity:progress >= 100 ? 0 : 1}} transition={{duration:0.8}}
+      className="fixed inset-0 z-[10000] bg-[#0d0904] flex items-center justify-center"
+    >
+      <div className="w-[260px] md:w-[380px]">
+        <div className="text-center">
+          <div className="text-[9px] tracking-[.5em] text-[#D4AF37]">SKIN · HAIR · BEAUTY</div>
+          <div className="font-display text-2xl md:text-4xl tracking-[.18em] mt-4 gold">CLINIC</div>
+        </div>
+        <div className="h-[1px] bg-white/10 mt-12 overflow-hidden relative">
+          <motion.div className="absolute top-0 left-0 h-full bg-[#D4AF37]" style={{width:`${progress}%`}} />
+        </div>
+        <div className="flex justify-between mt-3 text-[8px] tracking-[.3em] text-white/30">
+          <span>EST. 2007 · 19 YEARS EXPERIENCE</span>
+          <span>{Math.floor(progress)}%</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* --- CURSOR --- */
+function Cursor(){
+  useEffect(()=>{
+    if(window.innerWidth < 768) return;
+    const ring = document.querySelector(".cursor");
+    const dot = document.querySelector(".cursor-dot");
+    const move = e => {
+      ring.style.left = e.clientX+"px"; ring.style.top = e.clientY+"px";
+      dot.style.left = e.clientX+"px"; dot.style.top = e.clientY+"px";
+    };
+    window.addEventListener("mousemove", move);
+    document.querySelectorAll("a, button, select, input, textarea").forEach(el=>{
+      el.addEventListener("mouseenter", ()=> {
+        ring.style.width="54px"; ring.style.height="54px"; ring.style.background="rgba(212,175,55,0.15)";
+      });
+      el.addEventListener("mouseleave", ()=> {
+        ring.style.width="30px"; ring.style.height="30px"; ring.style.background="transparent";
+      });
+    });
+    return ()=> window.removeEventListener("mousemove", move);
+  },[]);
+  return(
+    <><div className="cursor"/><div className="cursor-dot"/></>
+  );
+}
+
+/* --- NAVBAR --- */
+function Navbar(){
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const nav=[
+    ["01","PHILOSOPHY","#philosophy"],
+    ["02","SERVICES","#procedures"],
+    ["03","FACILITIES","#approach"],
+    ["04","CONTACT","#contact"]
+  ];
+
+  return(
+    <>
+      <motion.header
+        initial={{y:-30, opacity:0}} animate={{y:0, opacity:1}} transition={{delay:2.5, duration:1}}
+        className={`fixed top-0 left-0 right-0 z-[100] px-5 md:px-10 lg:px-14 py-5 transition-all duration-500 ${scrolled ? 'bg-[#0d0904]/90 backdrop-blur-md border-b border-white/5 py-4' : ''}`}
+      >
+        <div className="max-w-[1700px] mx-auto flex items-center justify-between">
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="w-9 h-9 md:w-11 md:h-11 border border-[#D4AF37]/50 rounded-full flex items-center justify-center group-hover:border-[#D4AF37] transition duration-500">
+              <span className="font-display text-[10px] md:text-[11px] text-[#D4AF37]">SHB</span>
+            </div>
+            <div className="hidden sm:block">
+              <div className="font-display text-[11px] tracking-[.18em] text-white">SKIN HAIR BEAUTY</div>
+              <div className="text-[7px] tracking-[.35em] text-[#D4AF37] mt-1">DR. AKHILESH KUMAR</div>
+            </div>
+          </a>
+
+          <nav className="hidden lg:flex items-center gap-10">
+            {nav.map(([num,name,href])=>(
+              <a key={name} href={href} className="text-[9px] tracking-[.3em] text-white/70 hover:text-[#D4AF37] transition duration-500 flex items-center gap-2">
+                <span className="text-[#D4AF37]/70 text-[7px]">{num}</span> {name}
+              </a>
+            ))}
+          </nav>
+
+          <a href="#contact" className="hidden md:block border border-[#D4AF37]/40 px-6 py-3 text-[8px] tracking-[.3em] hover:bg-[#D4AF37] hover:text-[#0d0904] transition duration-500 font-medium">
+            BOOK CONSULTATION
+          </a>
+
+          <button onClick={()=>setOpen(!open)} className="lg:hidden text-[#D4AF37] text-3xl z-[101]">
+            {open ? "✕" : "☰"}
+          </button>
+        </div>
+      </motion.header>
+
+      <AnimatePresence>
+        {open &&(
+          <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="mobile-menu fixed inset-0 z-[90] flex flex-col justify-center px-8">
+            {nav.map(([num,name,href],i)=>(
+              <motion.a key={name} href={href} onClick={()=>setOpen(false)} initial={{x:-30,opacity:0}} animate={{x:0,opacity:1}} transition={{delay:i*0.1}} className="py-7 border-b border-white/10 flex justify-between items-center">
+                <span className="font-display text-2xl md:text-3xl gold">{name}</span>
+                <span className="text-[#D4AF37]/50 text-xs">{num}</span>
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+/* --- HERO --- */
+function Hero(){
+  const {scrollY} = useScroll();
+  const y = useTransform(scrollY, [0,900], [0,200]);
+  const opacity = useTransform(scrollY, [0,600], [1,0]);
+
+  return(
+    <section className="hero relative min-h-[85vh] md:min-h-[800px] h-screen overflow-hidden w-full flex items-center">
+      <motion.div style={{y}} className="absolute inset-[-5%] bg-cover bg-center pointer-events-none" />
+      
+      <motion.div style={{opacity}} className="relative z-10 w-full">
+        <div className="w-full max-w-[1700px] mx-auto px-6 md:px-12 lg:px-20 pt-10 md:pt-20">
+          <div className="max-w-[850px]">
+            <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:2.7,duration:1}} className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
+              <div className="reveal-line"/>
+              <span className="text-[7.5px] md:text-[10px] tracking-[.4em] md:tracking-[.45em] text-[#D4AF37] font-semibold">B.Sc., MBBS · 19 YEARS EXPERIENCE · EST. 2007</span>
+            </motion.div>
+
+            <motion.h1 initial={{opacity:0,y:40}} animate={{opacity:1,y:0}} transition={{delay:2.9, duration:1.2, ease:[.16,1,.3,1]}} className="font-display text-[15vw] sm:text-[11vw] md:text-[8vw] lg:text-[7vw] leading-[0.9] tracking-[-.03em]">
+              SKIN<br/>
+              <span className="gold gold-glow">HAIR</span><br/>
+              BEAUTY
+            </motion.h1>
+
+            <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:3.2,duration:1}} className="mt-6 md:mt-10 max-w-[480px]">
+              <p className="text-xs md:text-sm leading-relaxed text-white/80 font-light">
+                Expert Dermatologist & Cosmetologist care led by Dr. Akhilesh Kumar, providing advanced medical and aesthetic treatments since 2007.
+              </p>
+            </motion.div>
+
+            <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:3.4,duration:1}} className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4">
+              <a href="#contact" className="luxury-btn-primary px-7 py-4 md:px-8 md:py-5 text-[9px] md:text-[10px] tracking-[.3em] font-medium text-center">
+                BOOK PRIVATE CONSULTATION
+              </a>
+              <a href="#philosophy" className="luxury-btn-secondary px-7 py-4 md:px-8 md:py-5 text-[9px] md:text-[10px] tracking-[.3em] text-center">
+                DISCOVER THE PHILOSOPHY
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+
+      <div className="absolute bottom-8 left-6 md:left-12 z-10 flex items-center gap-3">
+        <div className="w-[1px] h-16 bg-white/20 relative overflow-hidden">
+          <motion.div animate={{y:[-30,60]}} transition={{duration:2, repeat:Infinity, ease:"easeInOut"}} className="absolute left-0 top-0 w-full h-6 bg-[#D4AF37]" />
+        </div>
+        <span className="text-[7px] tracking-[.3em] text-white/50 [writing-mode:vertical-rl]">SCROLL</span>
+      </div>
+
+      <div className="absolute right-6 md:right-12 bottom-8 text-right z-10 hidden sm:block">
+        <div className="font-display text-base md:text-xl text-white">DR. AKHILESH KUMAR</div>
+        <div className="text-[7px] tracking-[.3em] text-[#D4AF37] mt-1">B.Sc., MBBS · DERMATOLOGIST</div>
+      </div>
+    </section>
+  );
+}
+
+/* --- MARQUEE --- */
+function Marquee(){
+  return(
+    <div className="border-y border-white/5 py-5 md:py-6 overflow-hidden bg-black/20 w-full">
+      <motion.div animate={{x:["0%","-50%"]}} transition={{duration:25, repeat:Infinity, ease:"linear"}} className="flex w-max items-center gap-10 md:gap-20 text-[8px] md:text-[10px] tracking-[.4em] md:tracking-[.5em] text-white/50">
+        {[1,2,3,4,5].map(x=>(
+          <React.Fragment key={x}>
+            <span>19 YEARS EXPERIENCE</span><span className="text-[#D4AF37]">✦</span>
+            <span>24×7 EMERGENCY</span><span className="text-[#D4AF37]">✦</span>
+            <span>INDOOR PHARMACY</span><span className="text-[#D4AF37]">✦</span>
+            <span>FREE CAMP EVERY MONTH</span><span className="text-[#D4AF37]">✦</span>
+          </React.Fragment>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+/* --- PHILOSOPHY --- */
+function Philosophy(){
+  return(
+    <section id="philosophy" className="py-24 md:py-40 lg:py-48 px-6 md:px-12 lg:px-20 relative overflow-hidden w-full">
+      <div className="max-w-[1700px] mx-auto">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+          <motion.div initial={{opacity:0,x:-30}} whileInView={{opacity:1,x:0}} viewport={{once:true,margin:"-100px"}} transition={{duration:1}} className="lg:col-span-6 relative">
+            <div className="relative aspect-[0.85] md:aspect-[0.8] max-w-[550px] mx-auto">
+              <div className="absolute inset-0 doctor-photo z-10"/>
+              <div className="absolute inset-0 translate-x-4 translate-y-4 md:translate-x-6 md:translate-y-6 z-0"/>
+              
+              <div className="absolute bottom-5 right-5 md:-right-8 z-20 glass-gold px-6 py-5 md:px-8 md:py-6 shadow-xl">
+                <div className="font-display text-xl md:text-2xl gold">DR. AKHILESH KUMAR</div>
+                <div className="text-[7.5px] md:text-[9px] tracking-[.3em] text-white/80 mt-2">B.Sc., MBBS · EST. 2007</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div initial={{opacity:0,x:30}} whileInView={{opacity:1,x:0}} viewport={{once:true,margin:"-100px"}} transition={{duration:1}} className="lg:col-span-5 lg:col-start-8 mt-10 lg:mt-0">
+            <div className="flex items-center gap-3">
+              <div className="reveal-line"/>
+              <span className="text-[8px] tracking-[.4em] text-[#D4AF37]">01 — THE DOCTOR & PHILOSOPHY</span>
+            </div>
+
+            <h2 className="font-display text-[11vw] sm:text-5xl lg:text-[4.5vw] leading-[1] tracking-[-.02em] mt-6 md:mt-8">
+              EXCELLENCE<br/>
+              <span className="gold">IN CARE</span><br/>
+              & SCIENCE.
+            </h2>
+
+            <div className="w-16 md:w-20 h-[1px] bg-[#D4AF37]/50 my-8 md:my-10"/>
+
+            <p className="text-xs md:text-sm leading-relaxed text-white/80 max-w-[560px]">
+              Led by Dr. Akhilesh Kumar (B.Sc., MBBS), our clinic brings 19 years of dedicated medical experience since establishment in 2007. We combine advanced clinical dermatology with sophisticated cosmetology to offer trusted care.
+            </p>
+            <p className="text-xs md:text-sm leading-relaxed text-white/60 max-w-[560px] mt-4 md:mt-6">
+              With multi-branch accessibility, indoor pharmacy support, and monthly community welfare camps, we ensure comprehensive wellness and clinical excellence for every patient.
+            </p>
+
+            <blockquote className="border-l-2 border-[#D4AF37] pl-6 md:pl-8 mt-8 md:mt-12">
+              <p className="font-display text-lg md:text-2xl leading-relaxed text-white/90">
+                “Committed to advanced medical treatments and healthy, radiant skin for over a decade.”
+              </p>
+              <div className="text-[8px] md:text-[9px] tracking-[.35em] text-[#D4AF37] mt-4 md:mt-5">DR. AKHILESH KUMAR</div>
+            </blockquote>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --- CREDENTIAL STRIP --- */
+function Credibility(){
+  const items=[
+    ["19+ yrs","CLINICAL EXPERIENCE"],
+    ["EST. 2007","TRUSTED PRACTICE"],
+    ["24×7","EMERGENCY SERVICE"],
+    ["MONTHLY","FREE HEALTH CAMPS"]
+  ];
+  return(
+    <section className="border-y border-white/5 bg-black/20 w-full">
+      <div className="grid grid-cols-2 lg:grid-cols-4 max-w-[1700px] mx-auto">
+        {items.map(([big,small],i)=>(
+          <motion.div key={small} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1}} className="px-5 md:px-12 py-10 md:py-14 border-r border-b lg:border-b-0 border-white/5 last:border-r-0 hover:bg-white/[0.04] transition duration-500">
+            <div className="font-display text-2xl md:text-4xl gold">{big}</div>
+            <div className="text-[6.5px] md:text-[8px] tracking-[.3em] text-white/60 mt-3 md:mt-5 leading-relaxed">{small}</div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* --- SERVICES --- */
+const services=[
+  {
+    no:"01", category:"SKIN DOCTOR", title:"Skin Doctor Consultation", image:"skin-photo",
+    description:"Comprehensive medical evaluation and treatment for all general and complex skin conditions by Dr. Akhilesh Kumar.",
+    list:["General Dermatology", "Skin Infections", "Allergy Care", "Consultation"]
+  },
+  {
+    no:"02", category:"PIGMENTATION", title:"Pigmentation Treatment", image:"pigmentation-photo",
+    description:"Advanced clinical protocols designed to target melasma, sun spots, blemishes, and uneven skin tone effectively.",
+    list:["Melasma Therapy", "Sun Spot Removal", "Skin Brightening", "Blemish Correction"]
+  },
+  {
+    no:"03", category:"ACNE", title:"Acne Treatment", image:"acne-photo",
+    description:"Targeted medical solutions for active acne, cystic breakouts, and post-acne scarring to restore skin clarity.",
+    list:["Active Acne Control", "Acne Scar Revision", "Pore Refining", "Sebum Regulation"]
+  },
+  {
+    no:"04", category:"HAIR", title:"Hair Fall Treatment", image:"hair-photo",
+    description:"Scientific hair loss assessment and revitalization treatments designed to stop hair fall and stimulate healthy growth.",
+    list:["Hair Fall Evaluation", "Scalp Treatments", "Follicle Nourishment", "Regeneration Support"]
+  },
+  {
+    no:"05", category:"VITILIGO", title:"Vitiligo (Leucoderma)", image:"vitiligo-photo",
+    description:"Specialized dermatological care and management protocols for vitiligo (leucoderma) focused on repigmentation and skin support.",
+    list:["Specialized Diagnosis", "Medical Management", "Pigment Restoration Support", "Patient Counselling"]
+  }
+];
+
+function Procedures(){
+  const procedureRef=useRef(null);
+  const {scrollYProgress:procedureProgress}=useScroll({target:procedureRef,offset:["start start","end end"]});
+  const progressOpacity=useTransform(procedureProgress,[0,0.04,0.96,1],[0,1,1,0]);
+
+  return(
+    <section id="procedures" ref={procedureRef} className="pt-12 md:pt-16 pb-8 md:pb-10 px-6 md:px-12 lg:px-20 relative overflow-hidden w-full">
+      <motion.div className="service-diamond-field" style={{opacity:progressOpacity}} aria-hidden="true"><span/><span/><span/></motion.div>
+
+      <div className="max-w-[1700px] mx-auto">
+        <div className="service-intro grid lg:grid-cols-12 gap-8 md:gap-10 mb-6 md:mb-8">
+          <div className="lg:col-span-8">
+            <div className="flex items-center gap-3">
+              <div className="reveal-line"/>
+              <span className="text-[8px] tracking-[.4em] text-[#D4AF37]">02 — SPECIALIZED SERVICES</span>
+            </div>
+            <h2 className="font-display text-[10vw] md:text-5xl lg:text-[4.5vw] leading-[1] tracking-[-.02em] mt-6 md:mt-8">
+              EXPERT CARE<br/>
+              <span className="gold">FOR SKIN & HAIR.</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-4 lg:flex lg:items-end hidden sm:flex">
+            <p className="text-xs md:text-sm leading-relaxed text-white/70 max-w-sm">
+              Explore our core specialized treatments administered with precision and 19 years of clinical expertise.
+            </p>
+          </div>
+        </div>
+
+        <div className="service-snap-track">
+          {services.map((item,index)=>(
+            <motion.article
+              key={item.no}
+              initial={{opacity:0,y:20}}
+              whileInView={{opacity:1,y:0}}
+              viewport={{once:false,amount:0.25}}
+              transition={{duration:0.65,delay:0.04,ease:[.16,1,.3,1]}}
+              className="service-snap-slide grid lg:grid-cols-12 gap-6 lg:gap-14 items-center"
+            >
+              <div className="service-slide-copy lg:col-span-5 flex flex-col justify-center">
+                <div className="flex items-start gap-4 md:gap-7">
+                  <span className="text-[9px] md:text-[10px] tracking-[.2em] text-[#D4AF37] font-medium pt-1">{item.no}</span>
+                  <div>
+                    <div className="text-[8px] tracking-[.4em] text-white/60 mb-2">{item.category}</div>
+                    <h3 className="font-display text-2xl md:text-3xl lg:text-4xl text-[#D4AF37]">{item.title}</h3>
+                  </div>
+                </div>
+
+                <p className="text-xs md:text-sm leading-relaxed text-white/80 mt-4 md:mt-6 max-w-lg">
+                  {item.description}
+                </p>
+
+                <div className="flex flex-wrap gap-x-3 gap-y-2 mt-4 md:mt-6">
+                  {item.list.map(service=>(
+                    <span key={service} className="text-[7.5px] md:text-[8px] tracking-[.15em] text-[#D4AF37] border border-[#D4AF37]/20 px-3 py-1.5 rounded-sm bg-[#D4AF37]/5">
+                      {service}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="service-image-frame service-snap-image lg:col-span-7 relative overflow-hidden rounded-sm">
+                <div className={"absolute inset-0 " + item.image}/>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d0904]/80 via-transparent to-transparent"/>
+                <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8">
+                  <div className="text-[8px] tracking-[.4em] text-[#D4AF37]">SPECIALIZED SERVICE</div>
+                  <span className="font-display text-xl md:text-3xl text-white mt-2 block">{item.title}</span>
+                </div>
+                <div className="absolute top-5 right-5 md:top-8 md:right-8 text-[8px] tracking-[.3em] text-white/80">
+                  {item.no} / 05
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+/* --- FACILITIES & BRANCHES --- */
+function Approach(){
+  const facilities=[
+    ["01","INDOOR PHARMACY","Fully stocked onsite pharmacy providing prescribed dermatological medications and clinical products conveniently."],
+    ["02","24×7 EMERGENCY SERVICE","Round-the-clock emergency medical assistance and prompt care for urgent skin and health conditions."],
+    ["03","FREE CAMP EVERY MONTH","Regular monthly community welfare camps offering free health check-ups and consultations to the public."],
+    ["04","MULTIPLE BRANCHES","Conveniently accessible across two main locations in Panki Road and Panki Gauni Dham Guest House."]
+  ];
+  return(
+    <section id="approach" className="relative py-24 md:py-40 bg-black/20 overflow-hidden border-y border-white/5 w-full">
+      <div className="max-w-[1700px] mx-auto px-6 md:px-12 lg:px-20">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+          <motion.div initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} className="lg:col-span-5">
+            <div className="flex items-center gap-3">
+              <div className="reveal-line"/>
+              <span className="text-[8px] tracking-[.4em] text-[#D4AF37]">03 — FACILITIES & BRANCHES</span>
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-[4vw] leading-[1.1] mt-6 md:mt-8">
+              PATIENT CARE,<br/><span className="gold">AMPLIFIED.</span>
+            </h2>
+            <p className="text-xs md:text-sm leading-relaxed text-white/70 max-w-md mt-6 md:mt-8">
+              We provide comprehensive clinical facilities and community support alongside our multi-branch infrastructure for seamless patient care.
+            </p>
+
+            <div className="mt-10 p-6 glass-gold border-l-2 border-[#D4AF37]">
+              <div className="text-[8px] tracking-[.3em] text-[#D4AF37] mb-2">OUR BRANCH LOCATIONS</div>
+              <div className="text-xs md:text-sm text-white/90 space-y-2">
+                <p><strong>1. Main Branch:</strong> Panki Road</p>
+                <p><strong>2. Second Branch:</strong> Panki Gauni Dham Guest House</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="lg:col-span-6 lg:col-start-7 space-y-8 md:space-y-12 mt-6 lg:mt-0">
+            {facilities.map(([num,title,desc],i)=>(
+              <motion.div key={num} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1}} className="relative pl-10 md:pl-16">
+                <div className="absolute left-0 top-1 md:top-1.5 text-[#D4AF37] text-[9px] md:text-[10px] tracking-widest font-bold">{num}</div>
+                <h3 className="font-display text-xl md:text-2xl text-white">{title}</h3>
+                <p className="text-xs md:text-sm leading-relaxed text-white/60 max-w-md mt-2 md:mt-3">{desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --- STATEMENT --- */
+function Statement(){
+  return(
+    <section className="py-28 md:py-48 px-6 text-center relative overflow-hidden w-full">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0d0904] to-transparent opacity-80 z-0"></div>
+      <motion.div initial={{opacity:0,scale:0.95}} whileInView={{opacity:1,scale:1}} viewport={{once:true}} transition={{duration:1}} className="max-w-4xl mx-auto relative z-10">
+        <div className="text-[#D4AF37] text-2xl md:text-3xl mb-8 md:mb-10">✦</div>
+        <h2 className="font-display text-3xl md:text-5xl lg:text-[4vw] leading-[1.2] tracking-[-.02em]">
+          TRUSTED DERMATOLOGY CARE<br/>
+          <span className="gold gold-glow">FOR A HEALTHY FUTURE.</span>
+        </h2>
+        <p className="text-[7.5px] md:text-[9px] tracking-[.4em] md:tracking-[.5em] text-[#D4AF37]/80 mt-8 md:mt-10 font-medium">
+          B.Sc., MBBS · 19 YEARS EXPERIENCE · EST. 2007
+        </p>
+      </motion.div>
+    </section>
+  );
+}
+
+/* --- CONTACT --- */
+function Contact(){
+  const phone = "9369843056";
+  const email = "drakumar246@gmail.com";
+  const address = "Pathak Market, 148-B, Panki - Kalyanpur Rd, VIP Yadav Market, Kalyanpur, Kanpur, Uttar Pradesh 208017";
+  const mapQuery = encodeURIComponent(address);
+  const mapLink = "https://www.google.com/maps/search/?api=1&query=" + mapQuery;
+
+  return(
+    <section id="contact" className="py-24 md:py-32 px-6 md:px-12 lg:px-20 bg-black/30 border-t border-white/5 overflow-hidden w-full">
+      <div className="max-w-[1500px] mx-auto">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
+          <motion.div initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} className="lg:col-span-7">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="reveal-line"/>
+              <span className="text-[8px] tracking-[.4em] text-[#D4AF37]">04 — FIND OUR CLINIC</span>
+            </div>
+            <h2 className="font-display text-[10vw] md:text-5xl lg:text-[4vw] leading-[1.05] tracking-[-.02em] mb-8">
+              VISIT OUR<br/><span className="gold">CLINIC.</span>
+            </h2>
+            <div className="clinic-map-frame relative w-full h-[340px] sm:h-[420px] lg:h-[520px] overflow-hidden rounded-sm">
+              <iframe
+                src={"https://www.google.com/maps?q=" + mapQuery + "&output=embed"}
+                title="Map to Skin Hair Beauty Clinic, Pathak Market, Kalyanpur, Kanpur"
+                className="absolute inset-0 w-full h-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+            <a href={mapLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 mt-5 text-[9px] tracking-[.3em] text-[#D4AF37] hover:text-white transition">
+              OPEN DIRECTIONS <span aria-hidden="true">↗</span>
+            </a>
+          </motion.div>
+
+          <motion.div initial={{opacity:0,x:20}} whileInView={{opacity:1,x:0}} viewport={{once:true}} className="lg:col-span-5 flex flex-col justify-center mt-4 lg:mt-0">
+            <div className="flex items-center gap-3">
+              <div className="reveal-line"/>
+              <span className="text-[8px] tracking-[.4em] text-[#D4AF37]">HOURS & DIRECT CONTACT</span>
+            </div>
+
+            <div className="mt-8 p-6 md:p-8 glass-gold">
+              <div className="text-[8px] tracking-[.35em] text-[#D4AF37]">CLINIC HOURS</div>
+              <div className="font-display text-xl md:text-2xl text-white mt-3">Listed closing time: 8:00 PM</div>
+              <p className="text-xs md:text-sm leading-relaxed text-white/70 mt-3">
+                Check today’s opening time and full weekly schedule on Google Maps.
+              </p>
+              <a href={mapLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-5 text-[8px] tracking-[.3em] text-[#D4AF37] hover:text-white transition">
+                VIEW LIVE HOURS <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+            <div className="mt-8 space-y-6">
+              <div>
+                <div className="text-[8px] tracking-[.35em] text-[#D4AF37]">CALL THE CLINIC</div>
+                <a href={"tel:" + phone} className="font-display text-lg md:text-xl text-white mt-2 inline-block hover:text-[#D4AF37] transition">
+                  {phone}
+                </a>
+              </div>
+              <div>
+                <div className="text-[8px] tracking-[.35em] text-[#D4AF37]">EMAIL</div>
+                <a href={"mailto:" + email} className="text-sm md:text-base text-white/80 mt-2 inline-block hover:text-white transition break-all">
+                  {email}
+                </a>
+              </div>
+              <div>
+                <div className="text-[8px] tracking-[.35em] text-[#D4AF37]">EXACT ADDRESS</div>
+                <p className="text-xs md:text-sm leading-relaxed text-white/75 mt-2">{address}</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+/* --- FOOTER --- */
+function Footer(){
+  return(
+    <footer className="border-t border-[#D4AF37]/20 px-6 md:px-12 lg:px-20 pt-16 md:pt-20 pb-8 bg-[#0d0904] w-full">
+      <div className="max-w-[1700px] mx-auto">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="text-center md:text-left">
+            <div className="font-display text-2xl md:text-3xl text-white">
+              SKIN HAIR BEAUTY<span className="text-[#D4AF37]">.</span>
+            </div>
+            <div className="text-[7.5px] md:text-[8px] tracking-[.4em] text-white/60 mt-3 md:mt-4">EST. 2007 · 19 YEARS OF CLINICAL EXCELLENCE</div>
+          </div>
+          <div className="text-center md:text-right">
+            <div className="font-display text-xl md:text-2xl text-white">DR. AKHILESH KUMAR</div>
+            <div className="text-[7.5px] md:text-[8px] tracking-[.3em] text-[#D4AF37] mt-2 mb-2">B.Sc., MBBS · DERMATOLOGIST & COSMETOLOGIST</div>
+            <div className="text-[9px] md:text-[10px] text-white/60 tracking-widest">Call: 9369843056 | drakumar246@gmail.com</div>
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 mt-12 md:mt-16 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+          <div className="text-[7px] md:text-[7.5px] tracking-[.3em] text-white/50 text-center">
+            © 2026 SKIN HAIR BEAUTY CLINIC. ALL RIGHTS RESERVED.
+          </div>
+          <div className="flex gap-6 md:gap-8 text-[7px] md:text-[7.5px] tracking-[.3em] text-white/50">
+            <a href="tel:9369843056" className="hover:text-[#D4AF37] transition">CALL: 9369843056</a>
+            <a href="mailto:drakumar246@gmail.com" className="hover:text-[#D4AF37] transition">EMAIL US</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* --- WHATSAPP FLOATING BUTTON --- */
+function WhatsAppFloat() {
+  return (
+    <a href="https://wa.me/919369843056?text=Hello,%20I%20want%20to%20book%20a%20consultation%20with%20Dr.%20Akhilesh%20Kumar." target="_blank" className="whatsapp-float" aria-label="Chat on WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 413.6c-33.1 0-65.5-8.9-94-25.7l-6.7-4-69.8 18.3L72 334l-4.4-7.1c-18.4-29.6-28.1-63.7-28.1-98.8 0-103 83.8-186.8 186.8-186.8 54.9 0 106.5 21.4 145.4 60.3s60.3 90.5 60.3 145.4c0 103-83.8 186.8-186.8 186.8zm102.6-139.8c-5.6-2.8-33.3-16.4-38.5-18.3-5.2-1.9-8.9-2.8-12.7 2.8-3.7 5.6-14.5 18.3-17.8 22.1-3.3 3.8-6.6 4.2-12.2 1.4-5.6-2.8-23.8-8.8-45.3-27.9-16.7-14.9-28-33.3-31.3-38.9-3.3-5.6-.4-8.6 2.4-11.4 2.5-2.5 5.6-6.6 8.5-9.8 2.8-3.3 3.8-5.6 5.6-9.4 1.9-3.8.9-7.1-.5-9.8-1.4-2.8-12.7-30.6-17.4-41.9-4.5-11-9.1-9.5-12.7-9.7-3.4-.2-7.1-.2-10.8-.2-3.8 0-9.8 1.4-14.9 7-5.1 5.6-19.7 19.3-19.7 47.1 0 27.7 20.2 54.5 23 58.2 2.8 3.8 39.7 60.7 96.1 85 13.4 5.8 23.9 9.2 32 11.8 13.5 4.3 25.8 3.7 35.5 2.2 10.9-1.6 33.3-13.6 38-26.7 4.7-13.1 4.7-24.3 3.3-26.7-1.4-2.5-5.1-3.9-10.7-6.7z"/>
+      </svg>
+    </a>
+  );
+}
+
+/* --- APP --- */
+function App(){
+  const [loading,setLoading]=useState(true);
+  return(
+    <div className="relative w-full overflow-x-hidden">
+      {loading && <Preloader finish={()=>setLoading(false)}/>}
+      <Cursor/>
+      <Navbar/>
+      <main className="w-full overflow-x-hidden">
+        <Hero/>
+        <Marquee/>
+        <Philosophy/>
+        <Credibility/>
+        <Procedures/>
+        <Approach/>
+        <Statement/>
+        <Contact/>
+      </main>
+      <Footer/>
+      <WhatsAppFloat />
+      <div className="noise"/>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+<style>
+body {
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(179, 124, 53, 0.10), transparent 52%),
+    linear-gradient(145deg, #2c2117 0%, #251c14 52%, #1d150d 100%) !important;
+}
+
+main > section:not(.hero) {
+  background-color: rgba(61, 43, 26, 0.25) !important;
+}
+
+@media (max-width: 767px) {
+  body {
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(179, 124, 53, 0.09), transparent 45%),
+      linear-gradient(145deg, #2c2117 0%, #251c14 52%, #1d150d 100%) !important;
+  }
+
+  main > section:not(.hero) {
+    background-color: rgba(61, 43, 26, 0.29) !important;
+  }
+}
+</style>
+<style>
+@media (max-width: 767px) {
+  .whatsapp-float {
+    width: auto;
+    min-width: 146px;
+    height: 50px;
+    padding: 0 15px;
+    gap: 9px;
+    right: 16px;
+    bottom: 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #25d366, #168c49);
+    box-shadow: 0 7px 22px rgba(20, 170, 80, 0.34);
+  }
+
+  .whatsapp-float svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .whatsapp-float::after {
+    content: "WhatsApp";
+    display: inline-block;
+    color: #fff;
+    font: 600 12px Inter, sans-serif;
+    white-space: nowrap;
+  }
+}
+</style>
+<style>
+html {
+  scroll-behavior: smooth !important;
+  scroll-padding-top: 84px;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+<style>
+html {
+  scroll-snap-type: y mandatory;
+}
+
+#procedures .service-intro,
+#procedures .service-slide {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+#procedures .service-intro {
+  min-height: 100svh;
+}
+
+#procedures .service-slide {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.service-progress-indicator {
+  position: fixed;
+  left: clamp(10px, 2vw, 28px);
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.service-progress-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.service-progress-star {
+  color: #D4AF37;
+  font-size: 12px;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
+}
+
+.service-diamond-field {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.service-diamond-field span {
+  position: absolute;
+  bottom: -12px;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, #f3e5ab, #d4af37 65%, #8c6721);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.32);
+  transform: rotate(45deg);
+  opacity: 0;
+  animation: service-diamond-rise 6.8s ease-in infinite;
+}
+
+.service-diamond-field span:nth-child(1) {
+  left: 34%;
+  animation-delay: 0s;
+}
+
+.service-diamond-field span:nth-child(2) {
+  left: 61%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 2.2s;
+}
+
+.service-diamond-field span:nth-child(3) {
+  left: 79%;
+  width: 4px;
+  height: 4px;
+  animation-delay: 4.4s;
+}
+
+@keyframes service-diamond-rise {
+  0% { transform: translate3d(0, 0, 0) rotate(45deg) scale(0.65); opacity: 0; }
+  14% { opacity: 0.52; }
+  75% { opacity: 0.32; }
+  100% { transform: translate3d(12px, -76vh, 0) rotate(225deg) scale(1); opacity: 0; }
+}
+
+.service-image-frame {
+  perspective: 1100px;
+  transform-style: preserve-3d;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+}
+
+.service-image-frame > .absolute {
+  backface-visibility: hidden;
+  filter: saturate(1.06) contrast(1.02);
+}
+
+.service-mobile-image {
+  transform: perspective(900px) rotateX(0.8deg);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.35);
+  backface-visibility: hidden;
+}
+
+.clinic-map-frame {
+  background: #1a1208;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.32);
+}
+
+.clinic-map-frame iframe {
+  border: 0;
+  filter: saturate(0.82) contrast(1.02);
+}
+
+@media (max-width: 767px) {
+  #procedures .service-intro,
+  #procedures .service-slide {
+    min-height: 100svh;
+  }
+
+  .service-progress-indicator {
+    left: 8px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .service-diamond-field span {
+    animation: none;
+    display: none;
+  }
+}
+</style>
+<style>
+/* Remove the left scroll-progress circle and tighten service slides */
+.service-progress-indicator {
+  display: none !important;
+}
+
+#procedures .service-intro {
+  min-height: auto !important;
+  margin-bottom: 1.5rem !important;
+}
+
+#procedures .service-slide {
+  min-height: auto !important;
+  display: block !important;
+  padding-block: 10px !important;
+}
+
+#procedures .service-mobile-image {
+  margin-top: 16px !important;
+}
+</style>
+<style>
+#procedures .service-intro {
+  min-height: auto !important;
+  margin-bottom: 1.5rem !important;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+}
+
+.service-snap-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+#procedures .service-snap-slide {
+  min-height: calc(100vh - 84px);
+  min-height: calc(100svh - 84px);
+  padding-block: clamp(10px, 2vh, 18px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  align-content: center;
+}
+
+.service-snap-image {
+  height: min(65vh, 620px);
+  height: min(65svh, 620px);
+  min-height: 320px;
+}
+
+@media (max-width: 767px) {
+  #procedures .service-snap-slide {
+    min-height: calc(100vh - 72px);
+    min-height: calc(100svh - 72px);
+    row-gap: 16px;
+  }
+
+  .service-snap-image {
+    height: clamp(220px, 38svh, 340px);
+    min-height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #procedures .service-snap-slide {
+    scroll-snap-stop: normal;
+  }
+}
+</style>
+</body>
+</html>
