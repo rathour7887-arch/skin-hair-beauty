@@ -588,7 +588,7 @@ function Approach(){
     ["01","INDOOR PHARMACY","Fully stocked onsite pharmacy providing prescribed dermatological medications and clinical products conveniently."],
     ["02","24×7 EMERGENCY SERVICE","Round-the-clock emergency medical assistance and prompt care for urgent skin and health conditions."],
     ["03","FREE CAMP EVERY MONTH","Regular monthly community welfare camps offering free health check-ups and consultations to the public."],
-    ["04","MULTIPLE BRANCHES","Conveniently accessible across two main locations in Panki Road and Panki Gauni Dham Guest House."]
+    ["04","MULTIPLE BRANCHES","Conveniently accessible across two main locations in Panki Road and Panki Gauri Dham Guest House."]
   ];
   return(
     <section id="approach" className="relative py-24 md:py-40 bg-black/20 overflow-hidden border-y border-white/5 w-full">
@@ -610,7 +610,7 @@ function Approach(){
               <div className="text-[8px] tracking-[.3em] text-[#D4AF37] mb-2">OUR BRANCH LOCATIONS</div>
               <div className="text-xs md:text-sm text-white/90 space-y-2">
                 <p><strong>1. Main Branch:</strong> Panki Road</p>
-                <p><strong>2. Second Branch:</strong> Panki Gauni Dham Guest House</p>
+                <p><strong>2. Second Branch:</strong> Panki Gauri Dham Guest House</p>
               </div>
             </div>
           </motion.div>
@@ -1083,5 +1083,68 @@ html {
   }
 }
 </style>
+<!-- Scroll Progress Circle Start -->
+<style>
+    .scroll-progress-container {
+        position: fixed;
+        left: 30px;      /* Left side se distance */
+        bottom: 30px;    /* Niche se distance, agar center me chahiye to bottom hata kar top: 50% aur transform: translateY(-50%) laga dena */
+        z-index: 9999;   /* Taaki ye hamesha website ke content ke upar dikhe */
+        width: 60px;
+        height: 60px;
+    }
+
+    .progress-circle {
+        transform: rotate(-90deg); /* Circle ko top se start karne ke liye */
+        width: 100%;
+        height: 100%;
+    }
+
+    .progress-background {
+        fill: none;
+        stroke: #e6e6e6; /* Circle ka background color (Light Grey) */
+        stroke-width: 8;
+    }
+
+    .progress-bar {
+        fill: none;
+        stroke: #007bff; /* Fill hone wala color (Blue), ise apni website ke theme ke hisaab se change kar lena */
+        stroke-width: 8;
+        stroke-linecap: round; /* Edges ko gol karne ke liye */
+        stroke-dasharray: 283; /* 2 * pi * r (45) = ~283 */
+        stroke-dashoffset: 283; /* Starting me circle khali dikhega */
+        transition: stroke-dashoffset 0.1s ease-out; /* Smooth fill animation */
+    }
+</style>
+
+<div class="scroll-progress-container">
+    <svg class="progress-circle" viewBox="0 0 100 100">
+        <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+        <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+    </svg>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const progressBar = document.querySelector('.progress-bar');
+        const circumference = 283; // Circle ka total path length
+
+        window.addEventListener('scroll', function() {
+            // Calculate how much user has scrolled
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            
+            // Calculate percentage
+            const scrollPercent = scrollTop / docHeight;
+            
+            // Calculate how much to fill
+            const dashoffset = circumference - (scrollPercent * circumference);
+            
+            // Apply fill to the circle
+            progressBar.style.strokeDashoffset = dashoffset;
+        });
+    });
+</script>
+<!-- Scroll Progress Circle End -->
 </body>
 </html>
