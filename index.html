@@ -127,6 +127,81 @@ a { color: inherit; text-decoration: none; }
   
 
 .skin-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("original-photo.jpg"); background-size: cover; background-position: top center; }
+/* Book Consultation Button & Form Design */
+.book-btn {
+    background-color: transparent;
+    border: 2px solid #D4AF37; /* Golden color matching your theme */
+    color: #D4AF37;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 20px auto;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+.book-btn:hover {
+    background-color: #D4AF37;
+    color: #000;
+}
+
+.modal-overlay {
+    display: none; /* Starting me form hidden rahega */
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* Dark transparent background */
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    border: 1px solid #D4AF37;
+    margin: 15% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    color: white;
+    position: relative;
+    font-family: sans-serif;
+}
+
+.close-btn {
+    color: #D4AF37;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content input, .modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: transparent;
+    border: 1px solid #D4AF37;
+    color: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.submit-wa-btn {
+    width: 100%;
+    background-color: #25D366; /* WhatsApp Green */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
 .pigmentation-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("pigmentation.jpg"); background-size: cover; background-position: center; }
 .acne-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("acne.jpg"); background-size: cover; background-position: center; }
 .hair-photo { background: linear-gradient(180deg,rgba(0,0,0,.1),rgba(13,9,4,.8)), url("hair-fall.jpg"); background-size: cover; background-position: center; }
@@ -509,6 +584,17 @@ function Procedures(){
   const {scrollYProgress:procedureProgress}=useScroll({target:procedureRef,offset:["start start","end end"]});
   const progressOpacity=useTransform(procedureProgress,[0,0.04,0.96,1],[0,1,1,0]);
 
+  // MOVE FORM STATE HERE
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', phone: '', issue: '' });
+
+  const handleWhatsAppSubmit = (e) => {
+    e.preventDefault();
+    const text = `Hello Dr. Akhilesh Kumar,\n\nI would like to book a consultation.\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Issue:* ${formData.issue}`;
+    const encodedText = encodeURIComponent(text);
+    window.open(`https://wa.me/919935204714?text=${encodedText}`, '_blank');
+  };
+
   return(
     <section id="procedures" ref={procedureRef} className="pt-12 md:pt-16 pb-8 md:pb-10 px-6 md:px-12 lg:px-20 relative overflow-hidden w-full">
       <motion.div className="service-diamond-field" style={{opacity:progressOpacity}} aria-hidden="true"><span/><span/><span/></motion.div>
@@ -575,6 +661,63 @@ function Procedures(){
                   {item.no} / 05
                 </div>
               </div>
+
+              {/* BOOK CONSULTATION FORM INJECTED HERE FOR SLIDE 01 EXACTLY BELOW DR. PHOTO */}
+              {item.no === "01" && (
+                <div className="lg:col-span-7 lg:col-start-6 flex flex-col w-full z-20 mt-2">
+                  <button
+                    onClick={() => setIsFormOpen(!isFormOpen)}
+                    className="text-[10px] tracking-[.15em] text-[#D4AF37] hover:text-white transition-colors flex items-center gap-2 cursor-pointer uppercase border border-[#D4AF37]/40 px-5 py-2.5 rounded hover:bg-[#D4AF37]/10 w-fit"
+                  >
+                    Book Consultation <span style={{fontSize: "12px"}}>{isFormOpen ? '▲' : '▼'}</span>
+                  </button>
+
+                  <AnimatePresence>
+                    {isFormOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                        className="overflow-hidden w-full max-w-[320px]"
+                      >
+                        <form onSubmit={handleWhatsAppSubmit} className="bg-[#120c05] border border-[#D4AF37]/40 p-5 rounded flex flex-col gap-3 shadow-2xl text-left">
+                          <div className="text-[#D4AF37] text-[10px] tracking-widest mb-1 text-center font-medium">PRIVATE CONSULTATION</div>
+                          <input
+                            type="text"
+                            required
+                            placeholder="Your Name"
+                            className="w-full bg-[#1a1208] border border-[#D4AF37]/30 rounded px-3 py-2.5 text-white text-xs focus:border-[#D4AF37] outline-none transition-colors"
+                            value={formData.name}
+                            onChange={e => setFormData({...formData, name: e.target.value})}
+                          />
+                          <input
+                            type="tel"
+                            required
+                            placeholder="Your Phone Number"
+                            className="w-full bg-[#1a1208] border border-[#D4AF37]/30 rounded px-3 py-2.5 text-white text-xs focus:border-[#D4AF37] outline-none transition-colors"
+                            value={formData.phone}
+                            onChange={e => setFormData({...formData, phone: e.target.value})}
+                          />
+                          <textarea
+                            required
+                            placeholder="Describe your issue"
+                            rows="3"
+                            className="w-full bg-[#1a1208] border border-[#D4AF37]/30 rounded px-3 py-2.5 text-white text-xs focus:border-[#D4AF37] outline-none resize-none transition-colors"
+                            value={formData.issue}
+                            onChange={e => setFormData({...formData, issue: e.target.value})}
+                          ></textarea>
+                          <button
+                            type="submit"
+                            className="w-full bg-[#25D366] hover:bg-[#1da851] text-white text-[10px] tracking-widest font-bold py-3 rounded transition-colors mt-2 uppercase flex items-center justify-center gap-2"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-3.5 h-3.5 fill-current"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 413.6c-33.1 0-65.5-8.9-94-25.7l-6.7-4-69.8 18.3L72 334l-4.4-7.1c-18.4-29.6-28.1-63.7-28.1-98.8 0-103 83.8-186.8 186.8-186.8 54.9 0 106.5 21.4 145.4 60.3s60.3 90.5 60.3 145.4c0 103-83.8 186.8-186.8 186.8zm102.6-139.8c-5.6-2.8-33.3-16.4-38.5-18.3-5.2-1.9-8.9-2.8-12.7 2.8-3.7 5.6-14.5 18.3-17.8 22.1-3.3 3.8-6.6 4.2-12.2 1.4-5.6-2.8-23.8-8.8-45.3-27.9-16.7-14.9-28-33.3-31.3-38.9-3.3-5.6-.4-8.6 2.4-11.4 2.5-2.5 5.6-6.6 8.5-9.8 2.8-3.3 3.8-5.6 5.6-9.4 1.9-3.8.9-7.1-.5-9.8-1.4-2.8-12.7-30.6-17.4-41.9-4.5-11-9.1-9.5-12.7-9.7-3.4-.2-7.1-.2-10.8-.2-3.8 0-9.8 1.4-14.9 7-5.1 5.6-19.7 19.3-19.7 47.1 0 27.7 20.2 54.5 23 58.2 2.8 3.8 39.7 60.7 96.1 85 13.4 5.8 23.9 9.2 32 11.8 13.5 4.3 25.8 3.7 35.5 2.2 10.9-1.6 33.3-13.6 38-26.7 4.7-13.1 4.7-24.3 3.3-26.7-1.4-2.5-5.1-3.9-10.7-6.7z"/></svg> SUBMIT VIA WHATSAPP
+                          </button>
+                        </form>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
             </motion.article>
           ))}
         </div>
@@ -582,6 +725,7 @@ function Procedures(){
     </section>
   );
 }
+
 /* --- FACILITIES & BRANCHES --- */
 function Approach(){
   const facilities=[
@@ -609,7 +753,8 @@ function Approach(){
             <div className="mt-10 p-6 glass-gold border-l-2 border-[#D4AF37]">
               <div className="text-[8px] tracking-[.3em] text-[#D4AF37] mb-2">OUR BRANCH LOCATIONS</div>
               <div className="text-xs md:text-sm text-white/90 space-y-2">
-                <p><strong>1. Main Branch:</strong> Panki Road</p>
+1.                <p><strong>Main Branch:
+</strong> Panki Road</p>
                 <p><strong>2. Second Branch:</strong> Panki Gauri Dham Guest House</p>
               </div>
             </div>
@@ -725,6 +870,7 @@ function Contact(){
     </section>
   );
 }
+
 /* --- FOOTER --- */
 function Footer(){
   return(
