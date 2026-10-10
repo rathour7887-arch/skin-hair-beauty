@@ -1087,33 +1087,36 @@ html {
 <style>
     .scroll-progress-container {
         position: fixed;
-        left: 30px;      /* Left side se distance */
-        bottom: 30px;    /* Niche se distance, agar center me chahiye to bottom hata kar top: 50% aur transform: translateY(-50%) laga dena */
-        z-index: 9999;   /* Taaki ye hamesha website ke content ke upar dikhe */
-        width: 60px;
-        height: 60px;
+        left: 20px;      /* Phone ke hisaab se left se doori */
+        bottom: 25px;    /* Niche se doori (Image me draw kiye gaye circle ki jagah par) */
+        z-index: 9999;
+        width: 40px;     /* Mobile ke liye perfect medium size */
+        height: 40px;
     }
 
     .progress-circle {
-        transform: rotate(-90deg); /* Circle ko top se start karne ke liye */
+        transform: rotate(-90deg);
         width: 100%;
         height: 100%;
     }
 
     .progress-background {
         fill: none;
-        stroke: #e6e6e6; /* Circle ka background color (Light Grey) */
-        stroke-width: 8;
+        stroke: rgba(255, 255, 255, 0.1); /* Dark theme ke liye halka transparent background */
+        stroke-width: 3; /* Line ko patla kar diya */
     }
 
     .progress-bar {
         fill: none;
-        stroke: #007bff; /* Fill hone wala color (Blue), ise apni website ke theme ke hisaab se change kar lena */
-        stroke-width: 8;
-        stroke-linecap: round; /* Edges ko gol karne ke liye */
-        stroke-dasharray: 283; /* 2 * pi * r (45) = ~283 */
-        stroke-dashoffset: 283; /* Starting me circle khali dikhega */
-        transition: stroke-dashoffset 0.1s ease-out; /* Smooth fill animation */
+        stroke: #d4af37; /* Tumhari website se match karta hua Golden color */
+        stroke-width: 3; /* Line ko patla kar diya */
+        stroke-linecap: round;
+        stroke-dasharray: 283; 
+        stroke-dashoffset: 283; 
+        transition: stroke-dashoffset 0.1s ease-out;
+        
+        /* Yahan line me chamk (glow) add ki gayi hai */
+        filter: drop-shadow(0px 0px 6px rgba(212, 175, 55, 0.9)); 
     }
 </style>
 
@@ -1127,21 +1130,18 @@ html {
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const progressBar = document.querySelector('.progress-bar');
-        const circumference = 283; // Circle ka total path length
+        const circumference = 283; 
 
         window.addEventListener('scroll', function() {
-            // Calculate how much user has scrolled
             const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            // Mobile par height sahi calculate karne ke liye innerHeight ka use
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             
-            // Calculate percentage
-            const scrollPercent = scrollTop / docHeight;
-            
-            // Calculate how much to fill
-            const dashoffset = circumference - (scrollPercent * circumference);
-            
-            // Apply fill to the circle
-            progressBar.style.strokeDashoffset = dashoffset;
+            if (docHeight > 0) {
+                const scrollPercent = scrollTop / docHeight;
+                const dashoffset = circumference - (scrollPercent * circumference);
+                progressBar.style.strokeDashoffset = dashoffset;
+            }
         });
     });
 </script>
